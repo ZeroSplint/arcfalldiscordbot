@@ -1,5 +1,5 @@
 {
-  "name": "Arcfall Wiki Discord Bot",
+  "name": "arcfalldiscordbot",
   "description": "Arcfall Wiki Discord bot",
   "version": "0.0.2",
   "main": "bot.js",
@@ -9,8 +9,12 @@
  "author": "ZeroSplint",
   "license": "MIT",
   "dependencies": {
-    "cheerio":"0.22.0",
-    "discord.js":"11.1.0",
-    "request":"2.81.0"    
+    "discord.js": "^11.1.0",
+    "request":"2.81.0",
+    "cheerio": "^0.22.0"
+  },
+  "engines": {
+    "node": "6.10.3",
+    "npm": "3.10.10"
   }
 }
