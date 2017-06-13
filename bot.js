@@ -8,7 +8,8 @@ lastuserlist 				= [];
 lastcommandlist 			= []; 
 recipeKeyList 				= []; //Store key words to compare with
 recipeCategoryList 			= []; //Store recipe categorylist
-usersWaitingForCommandList  = []; //Store username + found categories awaiting input  
+usersWaitingForCommandList  = []; //Store username + found categories awaiting input 
+adminlist					= []; 
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
@@ -30,6 +31,8 @@ client.login(process.env.BOT_TOKEN);
 client.on('ready',() => 
 {
 	generateRecipeLists(recipeCategory); // Grab recipes from wiki and fill recipeKeyList and recipeCategoryList
+
+	adminlist.push(["ZeroSplint",1467]); 
 
 	console.log('Arcfall Discord Bot now Online');		
 });
@@ -120,7 +123,21 @@ var message = msg.content.toLowerCase();
 							{
 								console.log("Console command: " + "!wiki" + " timed out");
 							}
-						break;					
+						break;	
+
+						case "!update":
+
+						for (var i = 0; i < adminlist.length; i++) 
+						{
+							var admin = adminlist[0];
+							if(msg.author.username == admin[0] && msg.author.discriminator == admin[1]) 
+							{
+								msg.reply("Hello admin: " + msg.author.username + " updating the recipe list");
+								generateRecipeLists(recipeCategory);
+								break;
+							}							
+						}						
+						break;				
 					}					
 					
 					// !recipe
@@ -466,7 +483,7 @@ function findObject(array , object)
 
 function cleanRequest(requeststring) 
 {
-	requeststring = requeststring.replace(/[^a-zA-Z0-9 ]/g, "");	
+	requeststring = requeststring.replace(/[^a-zA-Z0-9 ()]/g, "");	
 	return requeststring.toLowerCase();
 }
 
